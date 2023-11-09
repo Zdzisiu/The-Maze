@@ -47,7 +47,7 @@ OnBoot
 	_today = "%(month)/%(day)" //Again, switch this around if using D/M
 	LastTalk = ""
 
-	OnGetColor
+	GetColor
 	--
 	"\0\s[0]Ah,%(Pose('','HUH',''))\w6 you're back!%(Pose('','happy',''))\w6 Hello, hello!\w6 I still%(Pose('','sad','')) have only this one book,\w3 so how about it,\w5%(Pose('','happy','')) ready to go into the maze again?\x"
 	--

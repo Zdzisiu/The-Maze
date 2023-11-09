@@ -179,11 +179,10 @@ OnNeedlePoke
 {
 	if reference0 == 0 //Sakura
 	{
-		"\0%(Pose('','HUH',''))Carefull!%(Pose('stright','HUH','thonk')) The book's delicate!%(Pose('stright','angry','thonk')) What if you tore a hole.\w8%(Pose('','what','actually')) I'd get in trouble with Omega you know"
+		"\0%(Pose('','HUH',''))Careful!%(Pose('stright','HUH','thonk')) The book's delicate!%(Pose('stright','angry','thonk')) What if you tore a hole.\w8%(Pose('','what','actually')) I'd get in trouble with Omega you know"
 
 		Pose(ANY('','stright'),ANY('HUH','angy','what','angry'),ANY('thonk',''))
-
+		--
 		GetColor
 	}
-	//etc...
 }
