@@ -57,11 +57,45 @@ Endings : array
 //Here you put flavor text that is displayed after a choice. You can make it conditional, or random using "|" as separator
 FlavorText : array
 {
-	"*The corridor is dark,\w4 and as you move to enter,\w4 %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream rings out.\w8 You cover your ears and push forward,\w4 it doesn't help.*|*As you approach the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w5 loud,\w3 shrieking and terrified.\w8 You cover your ears and push forward,\w5 it doesn't help.*|*As you enter the corridor,\w4 it's eerily quiet.\w7 You move closer to the wall,\w4 however,\w4 you quickly move away from it as you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) shriek coming from a small crack in the wall.\w8 You try to ignore it and move forward.*|*As you move through the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w4 a chilling shriek unlike any you've ever heard.\w8 You try to ignore it and move forward.*|*You hear a scream very close by,\w4 it get's closer and closer\w4 until you feel\w1 like your eardrums will burst.\w5 You cover your ears,\w6 yet it doesn't block out the sound at all.*|*The hallway stretches for what feels like eternity,\w4 far of in the distance, wailing can be heard.\w6 No matter how far you walk,\w7 it never gets even a bit louder or quieter.\w8 You finally turn around and the door is right there.*|*You round a corner,\w5 and are startled as a piercieng shriek suddenly emanates from all around you.\w6 It's short lived,\w2 however,\w4 and you carry on,\w6 feeling rattled*|*As you walk down the hallway,\w4 a screams rings out behind you.\w5 You turn to look,\w3 yet you see nothing except the door you came through.\w3 Despite that,\w6 you can hear the screams getting closer.\w3 You run to the next room,\w6 barely making it as the screams sound out from right behind you*"
+	screamText
+	xText
+	doorText
+}
 
-	"*As you move through the corridor,\w6 you can feel %(ANY('judging','disapproving')) stares from every direction.\w4 Whenever you try to find whatever is staring at you,\w5 you're met with a cold, stone wall.\w6 You pick up your pace and try to ignore it.*|*As you approach the entrance you feel a sudden wave of %(ANY('regret','guilt')) washing over you.\w8 You push through it and move forward.*|*A sudden sense of unease comes over you and you decide to turn around and pick another door, but the door won't open again. the only way is forward*|*you feel something on your hand, and slap at it. when your hand comes away, you see a dozen tiny eyes staring back. you shriek and bolt for the next room, relieved when they disappear as you cross the do*|*your trip through the hall is uneventful, almost pleasant. That is, until your knees begin to tremble, and you feel weaker with every step you take. Dragging yourself to the door is a monumental task, and you nearly collapse before you can make it.*|*you walk for several minutes down the corridor, only to see that there is no door at the end of it. You search around, but it's a dead end. You trudge back to the start, defeated. However, when you go back out the way you came in, you're in another room after all*|*try as you might to walk forwards, your feet will only take you backwards. Eventually you turn around and walk backward to the door. other than bumping into it and fumbling with the doorknob, you make it through unscathed*|your mind numbs as you walk through the doorway, and you drift through the hall in a fog. when you touch the handle of the door on the other side, your mind begins to clear, returning to clarity when you step through. You can't recall anything else about the trip through the corridor.*"
+screamText : nonoverlap_pool
+{
+	"*The corridor is dark,\w4 and as you move to enter,\w4 %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream rings out.\w8 You cover your ears and push forward,\w4 it doesn't help.*"
+	"*As you approach the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w5 loud,\w3 shrieking and terrified.\w8 You cover your ears and push forward,\w5 it doesn't help.*"
+	"*As you enter the corridor,\w4 it's eerily quiet.\w7 You move closer to the wall,\w4 however,\w4 you quickly move away from it as you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) shriek coming from a small crack in the wall.\w8 You try to ignore it and move forward.*"
+	"*As you move through the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w4 a chilling shriek unlike any you've ever heard.\w8 You try to ignore it and move forward.*"
+	"*You hear a scream very close by,\w4 it get's closer and closer\w4 until you feel\w1 like your eardrums will burst.\w5 You cover your ears,\w6 yet it doesn't block out the sound at all.*"
+	"*The hallway stretches for what feels like eternity. Far off in the distance, wailing can be heard.\w6 No matter how far you walk,\w7 it never gets even a bit louder or quieter.\w8 You finally turn around and the door is right there.*"
+	"*You round a corner,\w5 and are startled as a piercieng shriek suddenly emanates from all around you.\w6 It's short lived,\w2 however,\w4 and you carry on,\w6 feeling rattled*"
+	"*As you walk down the hallway,\w4 a screams rings out behind you.\w5 You turn to look,\w3 yet you see nothing except the door you came through.\w3 Despite that,\w6 you can hear the screams getting closer.\w3 You run to the next room,\w6 barely making it as the screams sound out from right behind you*"
+}
 
-	"*Your walk through the corridor is calm.*|*Nothing happens as you walk through the stone corridor.*|*The corridor is long and winding, with a series of doors. they're all locked, however, until you reach the end of the corridor and exit throu|he final door.*|*Nothing in particular happens. It's suspiciously serene.*|*The only thing you hear as you walk down the hall is your own footsteps.*|You keep a wary eye out as you move down the hall, but nothing happens.*|*Nothing of note happens as you walk forward. You can't help feeling a little paranoid, though, and pick up the pace.*|*You can see the door at the very end of the hall... the very, very long hall. Your legs are tired by the time you reach it.*"
+xText : nonoverlap_pool
+{
+	"*As you move through the corridor,\w6 you can feel %(ANY('judging','disapproving')) stares from every direction.\w4 Whenever you try to find whatever is staring at you,\w5 you're met with a cold, stone wall.\w6 You pick up your pace and try to ignore it.*"
+	"*As you approach the entrance you feel a sudden wave of %(ANY('regret','guilt')) washing over you.\w8 You push through it and move forward.*"
+	"*A sudden sense of unease comes over you and you decide to turn around and pick another door, but the door won't open again. the only way is forward*"
+	"*You feel something on your hand, and slap at it. when your hand comes away, you see a dozen tiny eyes staring back. you shriek and bolt for the next room, relieved when they disappear as you cross the do*"
+	"*Your trip through the hall is uneventful, almost pleasant. That is, until your knees begin to tremble, and you feel weaker with every step you take. Dragging yourself to the door is a monumental task, and you nearly collapse before you can make it.*"
+	"*You walk for several minutes down the corridor, only to see that there is no door at the end of it. You search around, but it's a dead end. You trudge back to the start, defeated. However, when you go back out the way you came in, you're in another room after all*"
+	"*Try as you might to walk forwards, your feet will only take you backwards. Eventually you turn around and walk backward to the door. other than bumping into it and fumbling with the doorknob, you make it through unscathed*"
+	"*Your mind numbs as you walk through the doorway, and you drift through the hall in a fog. when you touch the handle of the door on the other side, your mind begins to clear, returning to clarity when you step through. You can't recall anything else about the trip through the corridor.*"
+}
+
+doorText : nonoverlap_pool
+{
+	"*Your walk through the corridor is calm.*"
+	"*Nothing happens as you walk through the stone corridor.*"
+	"*The corridor is long and winding, with a series of doors. they're all locked, however, until you reach the end of the corridor and exit throug the final door.*"
+	"*Nothing in particular happens. It's suspiciously serene.*"
+	"*The only thing you hear as you walk down the hall is your own footsteps.*"
+	"*You keep a wary eye out as you move down the hall, but nothing happens.*"
+	"*Nothing of note happens as you walk forward. You can't help feeling a little paranoid, though, and pick up the pace.*"
+	"*You can see the door at the very end of the hall... the very, very long hall. Your legs are tired by the time you reach it.*"
 }
 
 //Here you put in the text that displays when the user chooses a choice with no ending/further path

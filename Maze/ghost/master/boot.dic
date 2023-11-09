@@ -63,6 +63,7 @@ GetColor : all
 {
 	Colors = (RAND(ARRAYSIZE(colorArray)),RAND(ARRAYSIZE(colorArray)),ANY(colorArray))
 	if !Flag("What"); "\![bind,Horns,%(Colors[2]),1]"
+	"\![bind,Book,%(ANY(colorArray)),1]"
 	"\![bind,Crystal,%(ANY(colorArray)),1]"
 }
 

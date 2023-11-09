@@ -55,7 +55,7 @@ OnWindowStateRestore : all
 //Tada! That's your url! Make sure you test it! The dev palette and script/network log can help with that
 On_homeurl
 {
-	""
+	"https://raw.githubusercontent.com/Zdzisiu/The-Maze/main/Maze/"
 }
 
 
@@ -173,4 +173,17 @@ With this function, you can quickly customize words that need to change based on
 username
 {
 	SHIORI3FW.UserName
+}
+
+OnNeedlePoke
+{
+	if reference0 == 0 //Sakura
+	{
+		"\0%(Pose('','HUH',''))Carefull!%(Pose('stright','HUH','thonk')) The book's delicate!%(Pose('stright','angry','thonk')) What if you tore a hole.\w8%(Pose('','what','actually')) I'd get in trouble with Omega you know"
+
+		Pose(ANY('','stright'),ANY('HUH','angy','what','angry'),ANY('thonk',''))
+
+		GetColor
+	}
+	//etc...
 }

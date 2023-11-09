@@ -8,7 +8,7 @@ craftmanurl,
 seriko.alignmenttodesktop,free
 seriko.use_self_alpha,1
 
-//sakura.menu,hidden
+sakura.menu,hidden
 
 //crystal
 sakura.bindgroup0.name,Crystal,Vivid_Pink

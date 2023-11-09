@@ -6,7 +6,7 @@ type,ghost
 shiori,yaya.dll
 
 craftman,Zdzisiu
-craftmanurl,
+craftmanurl,https://zdzisiu.github.io/Ukagaka/
 
 sakura.name,Maze
 kero.name,Narrator

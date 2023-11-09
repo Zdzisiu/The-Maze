@@ -2,4 +2,4 @@ charset,UTF-8
 type,ghost
 
 name,Maze
-directory,librarian
+directory,maze
