@@ -20,6 +20,15 @@ OnFirstBoot : all
 	OnStart
 }
 
+OnSendAchievements
+{
+	_names = "Dead End|Escape|Scream|Pieces|Fluffy|Change|A long way down|What a weird dream|Preposterous"
+	_desc = "You probably shouldn't have ignored all the X signs|Wow‚ that was easy|A shame you didn't have a reflective shield huh|A new puzzle!|Don't pet|It's no longer you|That was a lot of falling|Very anticlimactic|PREPOSTEROUS!!!!!!1!!!1!!!"
+	_hint = 0
+
+	"\![raiseplugin,Achievements,OnGetAchievements,The Maze,%(_names),%(_desc),%(_hint)]"
+}
+
 OnInitialize
 {
 	//If you want some variables to reset on boot, put them here. Tchahis event will happen even if you add other events like OnGhostChanged
