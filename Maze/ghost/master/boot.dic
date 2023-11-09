@@ -1,0 +1,85 @@
+#globaldefine SEP +"\n"+
+
+OnFirstBoot : all
+{
+	//If you add variables, make sure to initialize them here!
+	//Note - I haven't added anything about username or pronouns here because it's all handled by the SSP prefs
+	stroke = 0
+	LastTalk = ""
+
+	_names = "Dead End|Escape|Scream|Pieces|Fluffy|Change|A long way down|What a weird dream|Preposterous"
+	_desc = "You probably shouldn't have ignored all the X signs|Wow‚ that was easy|A shame you didn't have a reflective shield huh|A new puzzle!|Don't pet|It's no longer you|That was a lot of falling|Very anticlimactic|PREPOSTEROUS!!!!!!1!!!1!!!"
+	_hint = 0
+
+	"\![raiseplugin,Achievements,OnGetAchievements,The Maze,%(_names),%(_desc),%(_hint)]"
+
+	GetColor
+	
+	"\1\s[-1]\0%(Pose('','',''))\0\w8\w8\w8%(Pose('','HUH',''))%(cha)Oh!\w8 A%(Pose('','happy','')) challenger!\w8 Welcome,\w2 welcome!\w8%(Pose('','focused','')) Let's get right into it,\w4%(Pose('','happy','')) shall we?\x*Now,%(Pose('','what','thonk'))\w3 where did it start%(Pose('','what','thonk','flip'))t%(Pose('','what','thonk','flip'))t%(Pose('','what','thonk','flip'))t%(Pose('','what','thonk','flip'))t%(Pose('','what','thonk','flip'))\w8\w8\w8 **ah,%(Pose('','HUH',''))\w6 the%(Pose('','happy',''))re it is!***\x"
+	
+	OnStart
+}
+
+OnInitialize
+{
+	//If you want some variables to reset on boot, put them here. Tchahis event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	if !ISVAR("Path"); Path = IARRAY
+	if !ISVAR("choiceNumber"); choiceNumber = 0
+	if !ISVAR("MiscFlags"); MiscFlags = IARRAY
+	if !ISVAR("nextChoices"); nextChoices = IARRAY
+	colorArray = ("Vivid_Pink","Strong_Pink","Deep_Pink","Light_Pink","Moderate_Pink","Dark_Pink","Pale_Pink","Grayish_Pink","Pinkish_White","Pinkish_Gray","Vivid_Red","Strong_Red","Deep_Red","Very_Deep_Red","Moderate_Red","Dark_Red","Very_Dark_Red","Light_Grayish_Red","Grayish_Red","Dark_Grayish_Red","Blackish_Red","Reddish_Gray","Dark_Reddish_Gray","Reddish_Black","Vivid_Yellowish_Pink","Strong_Yellowish_Pink","Deep_Yellowish_Pink","Light_Yellowish_Pink","Moderate_Yellowish_Pink","Dark_Yellowish_Pink","Pale_Yellowish_Pink","Grayish_Yellowish_Pink","Brownish_Pink","Vivid_Reddish_Orange","Strong_Reddish_Orange","Deep_Reddish_Orange","Moderate_Reddish_Orange","Dark_Reddish_Orange","Grayish_Reddish_Orange","Strong_Reddish_Brown","Deep_Reddish_Brown","Light_Reddish_Brown","Moderate_Reddish_Brown","Dark_Reddish_Brown","Light_Grayish_Reddish_Brown","Grayish_Reddish_Brown","Dark_Grayish_Reddish_Brown","Vivid_Orange","Brilliant_Orange","Strong_Orange","Deep_Orange","Light_Orange","Moderate_Orange","Brownish_Orange","Strong_Brown","Deep_Brown","Light_Brown","Moderate_Brown","Dark_Brown","Light_Grayish_Brown","Grayish_Brown","Dark_Grayish_Brown","Light_Brownish_Gray","Brownish_Gray","Brownish_Black","Vivid_Orange_Yellow","Brilliant_Orange_Yellow","Strong_Orange_Yellow","Deep_Orange_Yellow","Light_Orange_Yellow","Moderate_Orange_Yellow","Dark_Orange_Yellow","Pale_Orange_Yellow","Strong_Yellowish_Brown","Deep_Yellowish_Brown","Light_Yellowish_Brown","Moderate_Yellowish_Brown","Dark_Yellowish_Brown","Light_Grayish_Yellowish_Brown","Grayish_Yellowish_Brown","Dark_Grayish_Yellowish_Brown","Vivid_Yellow","Brilliant_Yellow","Strong_Yellow","Deep_Yellow","Light_Yellow","Moderate_Yellow","Dark_Yellow","Pale_Yellow","Grayish_Yellow","Dark_Grayish_Yellow","Yellowish_White","Yellowish_Gray","Light_Olive_Brown","Moderate_Olive_Brown","Dark_Olive_Brown","Vivid_Greenish_Yellow","Brilliant_Greenish_Yellow","Strong_Greenish_Yellow","Deep_Greenish_Yellow","Light_Greenish_Yellow","Moderate_Greenish_Yellow","Dark_Greenish_Yellow","Pale_Greenish_Yellow","Grayish_Greenish_Yellow","Light_Olive","Moderate_Olive","Dark_Olive","Light_Grayish_Olive","Grayish_Olive","Dark_Grayish_Olive","Light_Olive_Gray","Olive_Gray","Olive_Black","Vivid_Yellow_Green","Brilliant_Yellow_Green","Strong_Yellow_Green","Deep_Yellow_Green","Light_Yellow_Green","Moderate_Yellow_Green","Pale_Yellow_Green","Grayish_Yellow_Green","Strong_Olive_Green","Deep_Olive_Green","Moderate_Olive_Green","Dark_Olive_Green","Grayish_Olive_Green","Dark_Grayish_Olive_Green","Vivid_Yellowish_Green","Brilliant_Yellowish_Green","Strong_Yellowish_Green","Deep_Yellowish_Green","Very_Deep_Yellowish_Green","Very_Light_Yellowish_Green","Light_Yellowish_Green","Moderate_Yellowish_Green","Dark_Yellowish_Green","Very_Dark_Yellowish_Green","Vivid_Green","Brilliant_Green","Strong_Green","Deep_Green","Very_Light_Green","Light_Green","Moderate_Green","Dark_Green","Very_Dark_Green","Very_Pale_Green","Pale_Green","Grayish_Green","Dark_Grayish_Green","Blackish_Green","Greenish_White","Light_Greenish_Gray","Greenish_Gray","Dark_Greenish_Gray","Greenish_Black","Vivid_Bluish_Green","Brilliant_Bluish_Green","Strong_Bluish_Green","Deep_Bluish_Green","Very_Light_Bluish_Green","Light_Bluish_Green","Moderate_Bluish_Green","Dark_Bluish_Green","Very_Dark_Bluish_Green","Vivid_Greenish_Blue","Brilliant_Greenish_Blue","Strong_Greenish_Blue","Deep_Greenish_Blue","Very_Light_Greenish_Blue","Light_Greenish_Blue","Moderate_Greenish_Blue","Dark_Greenish_Blue","Very_Dark_Greenish_Blue","Vivid_Blue","Brilliant_Blue","Strong_Blue","Deep_Blue","Very_Light_Blue","Light_Blue","Moderate_Blue","Dark_Blue","Very_Pale_Blue","Pale_Blue","Grayish_Blue","Dark_Grayish_Blue","Blackish_Blue","Bluish_White","Light_Bluish_Gray","Bluish_Gray","Dark_Bluish_Gray","Bluish_Black","Vivid_Purplish_Blue","Brilliant_Purplish_Blue","Strong_Purplish_Blue","Deep_Purplish_Blue","Very_Light_Purplish_Blue","Light_Purplish_Blue","Moderate_Purplish_Blue","Dark_Purplish_Blue","Very_Pale_Purplish_Blue","Pale_Purplish_Blue","Grayish_Purplish_Blue","Vivid_Violet","Brilliant_Violet","Strong_Violet","Deep_Violet","Very_Light_Violet","Light_Violet","Moderate_Violet","Dark_Violet","Very_Pale_Violet","Pale_Violet","Grayish_Violet","Vivid_Purple","Brilliant_Purple","Strong_Purple","Deep_Purple","Very_Deep_Purple","Very_Light_Purple","Light_Purple","Moderate_Purple","Dark_Purple","Very_Dark_Purple","Very_Pale_Purple","Pale_Purple","Grayish_Purple","Dark_Grayish_Purple","Blackish_Purple","Purplish_White","Light_Purplish_Gray","Purplish_Gray","Dark_Purplish_Gray","Purplish_Black","Vivid_Reddish_Purple","Strong_Reddish_Purple","Deep_Reddish_Purple","Very_Deep_Reddish_Purple","Light_Reddish_Purple","Moderate_Reddish_Purple","Dark_Reddish_Purple","Very_Dark_Reddish_Purple","Pale_Reddish_Purple","Grayish_Reddish_Purple","Brilliant_Purplish_Pink","Strong_Purplish_Pink","Deep_Purplish_Pink","Light_Purplish_Pink","Moderate_Purplish_Pink","Dark_Purplish_Pink","Pale_Purplish_Pink","Grayish_Purplish_Pink","Vivid_Purplish_Red","Strong_Purplish_Red","Deep_Purplish_Red","Very_Deep_Purplish_Red","Moderate_Purplish_Red","Dark_Purplish_Red","Very_Dark_Purplish_Red","Light_Grayish_Purplish_Red","Grayish_Purplish_Red","White","Light_Gray","Medium_Gray","Dark_Gray","Black")
+
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		LastTalk = ""
+	}
+}
+
+OnBoot
+{
+	_temp = SHIORI3FW.UserBirthday
+	_user_birthday = "%(_temp[1])/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(month)/%(day)" //Again, switch this around if using D/M
+	LastTalk = ""
+
+	OnGetColor
+	--
+	"\0\s[0]Ah,%(Pose('','HUH',''))\w6 you're back!%(Pose('','happy',''))\w6 Hello, hello!\w6 I still%(Pose('','sad','')) have only this one book,\w3 so how about it,\w5%(Pose('','happy','')) ready to go into the maze again?\x"
+	--
+	OnStart
+}
+
+OnSecondChange
+{
+	if RAND(40) == 1; Pose()
+}
+
+GetColor : all
+{
+	Colors = (RAND(ARRAYSIZE(colorArray)),RAND(ARRAYSIZE(colorArray)),ANY(colorArray))
+	if !Flag("What"); "\![bind,Horns,%(Colors[2]),1]"
+	"\![bind,Crystal,%(ANY(colorArray)),1]"
+}
+
+
+OnStart : all
+{
+	Path = IARRAY
+	choiceNumber = 0
+	nextChoices = IARRAY
+	"\p[2]\s[-1]\p[3]\s[-1]\p[4]\s[-1]\0"
+
+	"\b2%(Pose('stright','','actually'))*You wake up and find yourself in a maze,%(Pose('','focused',''))\w8 the walls are rough stone and%(Pose('','','')) there are 3 pathways,%(Pose('','focused','actually')) each one with a plaque with a different symbol above it*\n\n[half]%(RenderChoices(Choices))%(Pose('','focused',''))"
+}
+
+OnClose
+{
+	"\0\s[0]%(cha)%(Pose('','focused',''))Well,\w5%(Pose('','happy','')) that was fun,\w3 wasn't it?\w8%(Pose('','focused','')) Come by again sometime,\w6%(Pose('stright','wow','actually')) maybe by the time you're back I manage to stea-\w5%(Pose('stright','HUH','actually not')) *I mean borrow*,\w6%(Pose('stright','what','actually')) yes **borrow**,\w6%(Pose('','focused','')) another book from my brother,\w2 and%(Pose('','happy',''))\w5 you can try out another maze!"
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}

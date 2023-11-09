@@ -1,0 +1,426 @@
+cha
+{
+	"\![set,balloontimeout,-1]\*"
+}
+
+//====Decission Tree Framework====
+//==Arrays==
+
+//This example uses static arrays, but they can easily be dynamic for a varying decision trees
+
+//Here you put in your choices in the format "ID,Choice Text"
+Choices : array
+{
+	"Scream,Go into the pathway with a Scream plaque"
+	"X,Go into the pathway with an X plaque"
+	"Door,Go into the pathway with a Door plaque"
+}
+
+//Here you establish all of your paths based on IDs of your choices, those can be numbers, letters, words and symbols
+//You can make paths of any length, and they don't have to all have the same length
+Paths : array
+{
+	"X,X,X"
+	"Door,Door,Door"
+	"Scream,Scream,Scream"
+	"X,Scream,Door"
+	"X,Door,Scream"
+	"Scream,X,Door"
+	"Scream,Door,X"
+	"Door,X,Scream"
+	"Door,Scream,X"
+}
+
+//Here you put in your endings, in the same order as your paths
+//index of the path and index of your ending should be the same
+Endings : array
+{
+	"\b2%(Pose('stright','','actually'))Ahem.\n\n*\w8%(Pose('','focused',''))As you leave the corridor\w3 you are met with but a stone wall%(Pose('','','actually')) with a lone torch on it,\w5%(Pose('','focused','')) you turn back,\w2 but\w6%(Pose('','','')) there is only a wall,%(Pose('stright','focused','actually'))\w6 you spin around,\w7 but there are only walls and the torch,%(Pose('','focused',''))\w7 no entrance,\w8 no way to leave.\w8*\n\n%(Pose('stright','focused',''))Well,\w6 that's disappointing.%(Pose('','focused','thonk'))\n\w8Want to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2%(Pose('stright','','actually'))Ahem.\n\n*\w8At the end of the corridor you can see light,%(Pose('','focused',''))\w6 you shield your eyes%(Pose('','',''))\w4 as they get used to the bright light of the two suns.\w8 You escaped.%(Pose('','HUH',''))\w8\w8\w8*\n\nOH!%(Pose('','wow',''))\w8 Congratulations!%(Pose('','happy',''))\w8 You beat the maze!\w8\n%(Pose('','happy','actually'))Well,\w4 would you like to go through it **==\__q[OnStart]again\__q==** anyway?"
+
+	"\b2%(Pose('','what','thonk'))You turn into stone .\w8 .\w8 .\w8 Ah\w8 %(Pose('','HUH','thonk'))right,\w8 The passage, %(Pose('stright','HUH',''))\w6 apologies! \w8 Ahem. %(Pose('stright','','actually'))\n\n*\w8As you leave the corridor, %(Pose('','focused',''))\w7 you blink and find yourself unable to open your eyes, %(Pose('','',''))\w8 you can hear something move,\w8 yet your eyes %(Pose('','focused','')) remain closed,\w8  %(Pose('','','actually'))your hands unable to move even a fingertip,\w7%(Pose('','','')) you can slowly hear it approaching,\w7 **and %(Pose('','focused',''))you can't do anything about it.***\w8\w8\w8\n\nSo,%(Pose('','happy','')) want to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2\![set,zorder,2,3,4,0]%(Pose('','wow',''))\w1*Finally*,\w2 something interesting!\w6 Ahem.%(Pose('stright','','actually'))\n\n*\w8You enter a shaded cavern,\w4%(Pose('','','actually')) and before you can even scream you can feel your flesh tearing,%(Pose('','focused',''))\p[2]\s[%(ANY(4,5,6,7,8))]\0\w6 something ripping you apart piece\p[3]\s[%(ANY(4,5,6,7,8))]\0\w8 by\w8 piece.\p[4]\s[%(ANY(4,5,6,7,8))]\0\w8\w8\w8*\n\n%(Pose('','happy','actually'))You died!\w8 That was%(Pose('','happy','')) fun,\w5 wasn't it?\w4\nWould you like to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2%(Pose('stright','','actually'))Ahem.\n\n*As you enter a bright cavern,%(Pose('','','actually'))\w4 you can see a pile of fluffy fur,%(Pose('','focused',''))\w3 some kind of animal you assume.%(Pose('','',''))\w7 Before you even have time to consider what to do,%(Pose('','','actually'))\w6 the fur splits revealing gory flesh,%(Pose('','focused',''))\w7 moving upwards and upwards.\w4%(Pose('','','')) You don't have time to even scream\p[2]\s[%(ANY(4,5,6,7,8))]\0 as the pile of flesh lunges.\p[3]\s[%(ANY(4,5,6,7,8))]\0*\w8\w8\w8\n\n%(Pose('','sad',''))Ah, the fluffy ones are often the most dangerous.\w6%(Pose('','','thonk')) Well,\w3 anyway, want%(Pose('','focused','')) to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2%(Pose('','HUH','thonk'))Oh,\w8 how fun!%(Pose('','happy','thonk'))\w8 Ahem.%(Pose('stright','','actually'))*\n\nAs you enter the cavern,\w4%(Pose('stright','focused','actually')) you feel something touch your back,\w3%(Pose('','','')) the feeling turns into searing pain as your flesh is split.\w5%(Pose('','focused','')) And then you are fine,\w4 the gaping wound on your back closing.\w7%(Pose('','focused','actually')) Suddenly,\w3 you are moving. %(Pose('','',''))You try to stop,\w8 yet you have no control.%(Pose('','focused',''))\w8 You became a prisoner of your own body.*\w8\w8\w8\n\n%(Pose('','focused','actually'))Would you like to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2*%(Pose('stright','','actually'))As you stand in the empty cavern the corridor led you to,%(Pose('','focused','actually'))\w5 you hear a small crack,%(Pose('','',''))\w2 and suddenly the world moves,%(Pose('','focused',''))\w6 you are falling,\w3 and falling\w3 and falling,\w4 and*\n\n\w3 %(Pose('','','thonk','flip')).\w3 %(Pose('','','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3%(Pose('','','actually')) Wait,\w8 give me a second,\w7%(Pose('','what','thonk')) there is a lot of 'and falling' like,%(Pose('','focused','thonk'))\w6 more than three pages %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w3 %(Pose('','what','thonk','flip')).\w8%(Pose('','HUH','thonk')) Ah!\w6 There %(Pose('','happy','thonk'))it is!\w6 Ahem.%(Pose('','','actually'))\w7\n\n*Until you finally reach the ground,%(Pose('','focused',''))\w6 and hear the sickening crack\p[2]\s[%(ANY(4,5,6,7,8))]\0 of your shattering bones.\w7%(Pose('','','actually')) You died.\w5*\n\n%(Pose('','happy',''))There!\w4%(Pose('','focused','')) That was a long ending,\w6%(Pose('','what','')) who needed twenty-one pages filled with just 'and falling, and falling, and falling, and .%(Pose('','','')) . .'?%(Pose('','focused','')) Whatever,\w6 would you like to **==\__q[OnStart]try again\__q==**?"
+
+	"\b2%(Pose('wha','HUH','thonk','','?'))WHAT?\w8 It was all a dream?%(Pose('','what','thonk'))\w3 That kills all the tension!%(Pose('stright','angry','thonk'))\w4 Why even bother in that case%(Pose('','what','',''))\w4 .\w3 .\w4 .\w3 AH,%(Pose('','HUH','thonk'))\w7 apologies,%(Pose('','HUH',''))\w2 the passage.\w8%(Pose('stright','','actually')) Ahem.\n\n*As you enter the cavern, %(Pose('','','actually'))%(Wobble('the walls start to move,','0','1','1')) %(Pose('','focused',''))%(Wobble('their color changes and you can hear a faint voice.','','2','2')) %(Pose('','',''))\i[10000]%(Wobble('You blink and there is light.','','3','3'))*\n\nIt's another day and the voice of the narrator fades.\w6 The memory already gone,\w4 well,\w2 maybe if you **==\__q[OnStart]went back\__q==** to sleep you would return to the same dream."
+
+	"\b2%(Pose('stright','','actually'))Ahem.\n\n*You enter the brightly lit cavern, %(Pose('','focused','actually')) a bright, white lamp illuminating the white %(Pose('','','actually')) **tile walls** and floor?%(Pose('','what',''))\n\n**Tile**?%(Pose('','what','thonk'))\n\n*On the opposite wall,\w4 you can see a bright, blue, %(Pose('','HUH','actually'))\**circular** entrance? You enter it, and it* TURNS OUT TO BE A SLIDE?!%(Pose('','HUH','actually not'))\n\nWHY WOULD%(Pose('','angry','thonk')) THERE BE A SLIDE IN A DEATH MAZE?!\n\n%(Pose('','what',''))*YOU SLIDE DOWN ON THE GRASS, CONGRATULATIONS, YOU ESCAPED WITH STYLE?!*\n\n%(Pose('','angy',''))Preposterous!\w5 What even is this ending?!%(Pose('','angy','thonk'))\w5 Where is the drama,\w2 the monsters,\w2 the flesh eating fog,\w2 anything!?%(Pose('','angy','thonk'))\w8\n\n%(Pose('','what',''))You know what,\w3 whatever,\w4 do you want to **==\__q[OnStart]try again\__q==**?\w5%(Pose('','what','')) Maybe the next ending will make more sense."
+}
+
+//Here you put flavor text that is displayed after a choice. You can make it conditional, or random using "|" as separator
+FlavorText : array
+{
+	"*The corridor is dark,\w4 and as you move to enter,\w4 %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream rings out.\w8 You cover your ears and push forward,\w4 it doesn't help.*|*As you approach the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w5 loud,\w3 shrieking and terrified.\w8 You cover your ears and push forward,\w5 it doesn't help.*|*As you enter the corridor,\w4 it's eerily quiet.\w7 You move closer to the wall,\w4 however,\w4 you quickly move away from it as you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) shriek coming from a small crack in the wall.\w8 You try to ignore it and move forward.*|*As you move through the corridor,\w5 you hear %(ANY('a man‘s','a woman‘s','a child‘s','an unidentifiable','an indescribable','an inhuman')) scream,\w4 a chilling shriek unlike any you've ever heard.\w8 You try to ignore it and move forward.*|*You hear a scream very close by,\w4 it get's closer and closer\w4 until you feel\w1 like your eardrums will burst.\w5 You cover your ears,\w6 yet it doesn't block out the sound at all.*|*The hallway stretches for what feels like eternity,\w4 far of in the distance, wailing can be heard.\w6 No matter how far you walk,\w7 it never gets even a bit louder or quieter.\w8 You finally turn around and the door is right there.*|*You round a corner,\w5 and are startled as a piercieng shriek suddenly emanates from all around you.\w6 It's short lived,\w2 however,\w4 and you carry on,\w6 feeling rattled*|*As you walk down the hallway,\w4 a screams rings out behind you.\w5 You turn to look,\w3 yet you see nothing except the door you came through.\w3 Despite that,\w6 you can hear the screams getting closer.\w3 You run to the next room,\w6 barely making it as the screams sound out from right behind you*"
+
+	"*As you move through the corridor,\w6 you can feel %(ANY('judging','disapproving')) stares from every direction.\w4 Whenever you try to find whatever is staring at you,\w5 you're met with a cold, stone wall.\w6 You pick up your pace and try to ignore it.*|*As you approach the entrance you feel a sudden wave of %(ANY('regret','guilt')) washing over you.\w8 You push through it and move forward.*|*A sudden sense of unease comes over you and you decide to turn around and pick another door, but the door won't open again. the only way is forward*|*you feel something on your hand, and slap at it. when your hand comes away, you see a dozen tiny eyes staring back. you shriek and bolt for the next room, relieved when they disappear as you cross the do*|*your trip through the hall is uneventful, almost pleasant. That is, until your knees begin to tremble, and you feel weaker with every step you take. Dragging yourself to the door is a monumental task, and you nearly collapse before you can make it.*|*you walk for several minutes down the corridor, only to see that there is no door at the end of it. You search around, but it's a dead end. You trudge back to the start, defeated. However, when you go back out the way you came in, you're in another room after all*|*try as you might to walk forwards, your feet will only take you backwards. Eventually you turn around and walk backward to the door. other than bumping into it and fumbling with the doorknob, you make it through unscathed*|your mind numbs as you walk through the doorway, and you drift through the hall in a fog. when you touch the handle of the door on the other side, your mind begins to clear, returning to clarity when you step through. You can't recall anything else about the trip through the corridor.*"
+
+	"*Your walk through the corridor is calm.*|*Nothing happens as you walk through the stone corridor.*|*The corridor is long and winding, with a series of doors. they're all locked, however, until you reach the end of the corridor and exit throu|he final door.*|*Nothing in particular happens. It's suspiciously serene.*|*The only thing you hear as you walk down the hall is your own footsteps.*|You keep a wary eye out as you move down the hall, but nothing happens.*|*Nothing of note happens as you walk forward. You can't help feeling a little paranoid, though, and pick up the pace.*|*You can see the door at the very end of the hall... the very, very long hall. Your legs are tired by the time you reach it.*"
+}
+
+//Here you put in the text that displays when the user chooses a choice with no ending/further path
+WrongTurn
+{
+	"*%(Pose('','focused',''))You find yourself back at the beginning.*"
+	"*%(Pose('','focused',''))You circled back to the start.*"
+}
+
+//Framework
+OnPathChoice : all
+{
+	"\0\s[0]\b2%(cha)"
+
+	_choice = reference0
+	_choiceID = 0
+
+	//Get the index position of the user choice
+	for _i = 0; _i < ARRAYSIZE(Choices);_i++
+	{
+		if _choice[0] == Choices[_i][0]; _choiceID = _i
+	}
+
+	nextChoices = IARRAY
+
+	//Find the next possible choices that lead to an ending
+	foreach Paths ; _path
+	{
+		if _path[choiceNumber] == _choice && _path[1+choiceNumber] != ""; nextChoices ,= _path[1+choiceNumber]
+	}
+
+	Path ,= _choice
+	choiceNumber++
+
+	if ARRAYSIZE(nextChoices) == 0 && ASEARCH("%(Path)",Paths) != -1 //Render an ending if there are no next choices and the path leads to an ending
+	{
+		"%(Pose('','','thonk'))Let's see, %(Path[0])-%(Path[1])-%(Path[2]),%(Pose('','','thonk','flip')) %(Path[0])-%(Path[1])-%(Path[2]),%(Pose('','','thonk','flip')) %(Path[0])-%(Path[1])-%(Path[2])%(Pose('','','thonk','flip'))*. . . .%(Pose('','','thonk','flip')) . . . %(Pose('','HUH','thonk'))Ah! %(Pose('stright','happy',''))There it is. %(Pose('stright','happy','actually'))%(Path[0])-%(Path[1])-%(Path[2])!*\x"
+
+		//Here you can put any additional flags and checks for your endings
+
+		_ending = ASEARCH("%(Path)",Paths) //ID of the ending
+
+		Endings[_ending]
+
+		"\n\n\![*]\q[Close,close]"
+		"\![raiseplugin,Achievements,OnLockUnlock,The Maze,%(_ending),1]"
+	}
+	else
+	{
+		if ASEARCH("%(Path)",Paths) == -1 && ARRAYSIZE(nextChoices) == 0 //Render the wrong path text and reset everything if the path doesn't lead to any ending
+		{
+			Path = IARRAY
+			choiceNumber = 0
+
+			WrongTurn
+
+			AddFlag("Wrong Turn") //Custom flag (Simple Flag Function by Zichqec https://ukagaka.zichqec.com/)
+		}
+		else
+		{
+
+			_flavorText = ANY(SPLIT(FlavorText[_choiceID],"|")) //Or render one of the flavor texts associated with the choice
+
+			_flavorText = REPLACE(_flavorText,",",",%(Pose(ANY('stright',''),ANY('','focused'),ANY('thonk','actually','')))")
+			_flavorText = REPLACE(_flavorText,".",".%(Pose(ANY('stright',''),ANY('','focused'),ANY('thonk','actually','')))")
+
+			Pose(ANY('stright',''),ANY('','focused'),ANY('thonk','actually',''),ANY('stright','')) + _flavorText
+		}
+
+		"\n\n[half]"
+
+		RenderChoices(Choices) //Render Choices
+	}
+
+	//"\1\b2Choice: " + _choice SEP "ChoiceID: " + _choiceID SEP "Next Choices: %(nextChoices)" SEP "Path: %(Path)" SEP "ChoiceNum: " +  choiceNumber + "\e"
+}
+
+RenderChoices : all
+{
+	"\_q"
+
+	_choiceID = IARRAY
+
+	foreach _argv; _nextChoice
+	{
+		for _i = 0; _i < ARRAYSIZE(Choices);_i++
+		{
+			if _nextChoice[0] == Choices[_i][0]; _choiceID ,= _i
+		}
+	}
+
+	//Shuffle the choices (Shuffle function by Zichqec [https://ukagaka.zichqec.com/])
+	//_choiceID = Shuffle(_choiceID)
+
+	foreach _choiceID; _choice
+	{
+		"\__q[OnPathChoice," + Choices[_choice][0] + "]" + Choices[TOINT(_choice)][1] + "\__q\n"
+	}
+
+	//Custom Addition based on flags
+	if Flag("Wrong Turn"); "\n\![*]\__q[OnHint]You ask for a hint\__q"
+	if Flag("Change"); "\n\![*]\__q[OnColor]You ask him about his colors\__q"
+	if !Flag("What"); "\n\![*]\__q[OnHorns]Poke his horns\__q"
+	else; "\n\![*]\__q[OnHorns]Poke his head\__q"
+
+	"\n\n\![*]\q[Close,close]\_q"
+}
+
+//====Other====
+
+OnHint
+{
+	"\b2\0%(cha)%(Pose('','focused','thonk'))Hm?\w8\w6 A hint?%(Pose('wha','focused',''))\w7 Well,\w8%(Pose('','what','thonk'))\w3 maybe try to move in threes?%(Pose('stright','happy','actually'))\w5 Three is such a good number after all!%(Pose('','happy',''))\w5 3 meals,%(Pose('','happy','actually'))\w3 3 times of day,\w3 3 seasons!\w3 Huh?%(Pose('wha','HUH','','','?'))\w6 What do you mean there%(Pose('wha','what','','','?')) are 4 seasons?\w8%(Pose('','what','')) It was always 3,\w3 when did they add a fourth?%(Pose('','what','thonk'))\w6%(Pose('','focused','actually')) It was always the season of Darkness,\w3 The season of Shade\w3 and the season of Glow!\w4%(Pose('','what','thonk')) Who needs a fourth season?!\w4%(Pose('','angy','actually')) Preposterous!\n\n[half]"
+  	"\b2\0\s[0]%(cha)%(Pose('','focused','thonk'))You want a hint?\w5 Well,%(Pose('','what','thonk'))\w5 maybe never choose a door twice!%(Pose('stright','happy','actually'))\w6%(Pose('','sad','thonk')) Two is an unlucky number,\w4 after all.\w5%(Pose('','focused','thonk')) Hm? Thirteen is%(Pose('','what','thonk')) unlucky?\w7%(Pose('stright','focused','')) Why would it be,\w7%(Pose('','what','actually')) it has three in it,\w3%(Pose('','happy','actually')) the best number!\n\n[half]"
+	--
+	RenderChoices(Choices)
+
+}
+
+OnHorns : all
+{
+	if !Flag("What")
+	{
+		AddFlag("What")
+		--
+		"\![bind,Horns,%(Colors[2]),0]\w8\w8\w8\w8%(Pose('','focused','thonk'))Hmm?\w8%(Pose('wha','focused','','','?')) Why are you looking at me like that?\w8%(Pose('stright','HUH','')) My horns?\w8 What%(Pose('','what','')) do you mean? I don't have horns.%(Pose('wha','HUH','','','?'))"
+	}
+	else
+	{
+		RemoveFlag("What")
+		--
+		"\![bind,Horns,%(Colors[2]),1]%(Pose('','focused','thonk'))Hmm?\w8%(Pose('wha','focused','','','?')) Why are you looking at me like that again?\w8%(Pose('stright','HUH','')) My horns?\w8%(Pose('','HUH','thonk')) What's wrong with them?"
+	}
+	--
+	"\n\n[half]"
+	--
+	RenderChoices(Choices)
+}
+
+OnColor
+{
+	"%(Pose('','focused','thonk'))Hm?\w8\w8%(Pose('','what','thonk')) I changed colors?\w8 What do you mean?%(Pose('','what','actually'))\w8 I always looked this way"
+	--
+	"\n\n[half]"
+	--
+	RenderChoices(Choices)
+}
+
+//Written by Zichqec https://ukagaka.zichqec.com/
+
+//To call the function, you can either call the function in your code like this:
+//Shuffle("A string!") or Shuffle(SomeArray)
+//Or in dialogue like this:
+//"%(Shuffle('A string!'))" or "%(Shuffle(SomeArray))"
+//It will automatically detect strings vs arrays. General purpose arrays will have their elements shuffled. Anything else is treated as a string, including simple arrays, and will have the characters scrambled.
+//If you send more than 1 argument, it will not work, so don't do that.
+
+Shuffle
+{
+	_output = IARRAY
+	if GETTYPE(_argv) == 4 //If it's an array. General purpose arrays only!
+	{
+		while ARRAYSIZE(_argv) > 0
+		{
+			_rand = RAND(ARRAYSIZE(_argv))
+			_output ,= _argv[_rand]
+			_argv[_rand] = IARRAY
+		}
+	}
+	else //If it's anything else it'll be treated as a string
+	{
+		_argv = TOSTR(_argv)
+		while STRLEN(_argv) > 0
+		{
+			_rand = RAND(STRLEN(_argv))
+			_output += SUBSTR(_argv,_rand,1)
+			_argv = ERASE(_argv,_rand,1)
+		}
+	}
+	_output
+}
+
+//Get a random number within the specified range (inclusive by default). Even handles negative numbers!
+//If you exclude either of the first two arguments, it will return nothing.
+//If you write the arguments in the wrong order or you put in strings instead of integers, I don't know what will happen nor am I planning to cover those cases.
+//Arg 0: The lowest possible value
+//Arg 1: The highest possible value
+//Arg 2: "exclusive" for exclusive range (1-10 would only output numbers from 1-9), leave blank if unwanted
+//Example: RangeRand(1,10) will output a random number from 1 to 10
+RangeRand
+{
+    if _argv[0] == "" || _argv[1] == ""; {return}
+
+    _num = _argv[0]
+    _randamt = _argv[1] + 1
+    if _argv[2] == "exclusive"; _randamt--
+
+    _randamt -= _num //Adjust how much the RAND function will output based on the lowest value
+
+    _num += RAND(_randamt)
+    _num
+}
+
+//Written by Zichqec https://ukagaka.zichqec.com/
+
+//Usage: This is intended to take the place of single-use variables that only contain 0 or 1, used as flags for certain events and such. With these functions, you can store all those flags as a single array, meaning you can make as many flags as you want without having to really worry about save bloat. It can also make your code a bit more readable!
+
+//You'll want to put 'MiscFlags = IARRAY' into your OnFirstBoot. That'll set up an empty array for flags to be stored in.
+//When you want to check if a flag is set or not, you can do it like so:
+//if Flag("My Flag") == 0
+//or
+//if Flag("My Flag") == 1
+
+//Any flags that are NOT in the array are 0, and any flags that ARE in the array are 1. So, to set a flag to 1, you add it to the array like this:
+//if Flag("My Flag") == 0; MiscFlags ,= "My Flag"
+
+//You don't technically need the if check there, but it stops duplicate entries from being added. The ,= is also important; that adds a new element to an array. Don't use += for this!
+
+//If you want to set a flag back to 0, you can remove it like so:
+//RemoveFlag("My Flag")
+
+//Flag names can be just about anything you want! They're just stored as strings. For example, for S I have "Saw Gaster with googly eyes", and for Lulo I have things like "Unlocked MP3 player" and "Unlocked journal". If you want to see what flags are set, you can just put %(MiscFlags) into script input, so it's helpful to have names that describe the flag!
+
+Flag //Checks to see if a flag exists. Returns 1 if yes, returns 0 if no
+{
+	if ASEARCH(_argv[0],MiscFlags) != -1; 1
+	else; 0
+}
+
+RemoveFlag //Removes all instances of a flag in the array.
+{
+	_elements = ASEARCHEX(_argv[0],MiscFlags)
+	if ARRAYSIZE(_elements) > 0
+	{
+		for _i = ARRAYSIZE(_elements) - 1; _i >= 0; _i-- //Goes from the end of the list to the start, so the elements stay in the same positions while we erase
+		{
+			_current = _elements[_i]
+			MiscFlags[_current] = IARRAY
+		}
+	}
+}
+
+AddFlag {
+    if Flag(_argv[0]) == 0; MiscFlags ,= _argv[0]
+}
+
+
+//Technical details:
+
+//ASEARCH is a YAYA command that searches an array for the value you specify. If it doesn't find the value, it returns -1. If it finds the value, it returns the position in the array.
+
+//ASEARCHEX is similar, but it finds all instances of the same value, and returns the positions as a new array.
+
+//So, it IS possible to skip a step here and write if ASEARCH("My Flag",MiscFlags) != -1, to see if a flag is set. But != -1 is a bit confusing at times! So the Flag function here returns 1 if the flag is set, and 0 if it is not, to simplify things.
+
+//With the RemoveFlag function, all it does is see how many instances of the value there are, then start erasing them from the end of the array working towards the start of the array, so that the array positions don't change as it erases. The reason I've done it this way is so that if someone accidentally adds the same flag to the array a bunch of times, all of them will be erased, so that the flag returns 0.
+
+//Written by Zichqec https://ukagaka.zichqec.com/
+
+//To call the function, you can either call the function in your code like this:
+//Wobble("Your dialogue here!")
+//Or in dialogue like this:
+//"%(Wobble('Your dialogue here!'))"
+
+//You can also overwrite the default values by sending extra arguments after the dialogue. Argument 0 will always be the dialogue you want to run through the wobble function. Argument 1 is for random upper/lowercase (1 is on and 0 is off), arguments 2 and 3 are X and Y jitter respectively, argument 4 is the amount the font size can vary by per-letter, and argument 5 is if the font size can change up, down, or both (0 is both, 1 is up, and 2 is down).
+
+//You may exclude any of these arguments, but you must include a blank argument where they would be.
+//Example: Wobble("Spooooky","","10","30","2","1")
+//This will skip the upper/lowercase argument.
+//Arguments that are farthest to the right can be ignored entirely if you don't want them.
+//Example: Wobble("Spooooky","1")
+//This will add random upper/lowercase characters, but use default values for everything else. But if you want to add arguments for changing the font size and nothing else you'd have to write it like this:
+//Example: Wobble("Spooooky","","","","2","1")
+
+//If you want to write an apostrophe in dialogue, write ## and it'll be replaced with an apostrophe
+
+Wobble
+{
+	_argv[0] = REPLACE(_argv[0],"##","'") //replaces ## with an apostrophe, you can change this if you want to use something else
+
+	//Default values - Set these to whatever you'd like, you can override them for each individual dialogue if you like
+	_UPlow = 0		//Controls if letters are randomly converted to upper/lowercase. 0 for off, 1 for on.
+	_Xjitter = 5	//Controls how much space can be between each letter. Higher numbers will be more spaced out.
+	_Yjitter = 5	//Controls how much letters can vary up and down. Higher numbers will be more spaced out.
+	_SizeJitter = 0 //Controls how much the font size can change per letter. Higher numbers will have more extreme variance.
+	_SizeUpDown = 1 //Controls if the font size can go up, down, or both. 0 for both, 1 for up, 2 for down.
+
+	if _argv[1] != ""; _UPlow = _argv[1] //These check if the user has sent special arguments, and if not, uses the default values
+	if _argv[2] != ""; _Xjitter = _argv[2]
+	if _argv[3] != ""; _Yjitter = _argv[3]
+	if _argv[4] != ""; _SizeJitter = _argv[4]
+	if _argv[5] != ""; _SizeUpDown = _argv[5]
+
+	_word = "" //Initialize display
+	for _i = 0; _i < STRLEN(_argv[0]); _i++
+	{
+		_let = SUBSTR(_argv[0],_i,1) //Get the current letter
+		if TOINT(_UPlow) == 1 //If random upper/lower is on, flip a coin to determine which this letter will be
+		{
+			if RAND(2) == 1; _let = TOUPPER(_let); else; _let = TOLOWER(_let)
+		}
+		_X = RAND(_Xjitter) //Get random values for X, Y, and Size
+		_Y = RAND(_Yjitter)
+		_Sz = RAND(_SizeJitter)
+
+		if _SizeUpDown == 1 //Size only goes up
+		{
+			_Sz = "+" + _Sz
+		}
+		elseif _SizeUpDown == 2 //Size only goes down
+		{
+			_Sz = "-" + _Sz
+		}
+		else //Flip a coin on if the size should go up or down
+		{
+			if RAND(2) == 1; _Sz = "+" + _Sz; else; _Sz = "-" + _Sz
+		}
+		_word += "\_l[@%(_X),@%(_Y)]\f[height,%(_Sz)]" + _let //Add to the display
+	}
+
+	_word
+}
+
+Pose : all
+{
+	_type = _argv[0]
+	_expression = _argv[1]
+	_armPose = _argv[2]
+	_interval = ""
+
+	if _type == ""; _type = "regular"
+	if _expression == "";_expression = "regular"
+	if _armPose == ""; _armPose = "regular"
+
+	_types = ("regular,0","stright,1","what,2","wha,3")
+	_exp = ("regular,1800","focused,2100","angry,6600","angy,6900","sad,6300","happy,2400","HUH,2700","wow,3000","what,3300")
+	_arm = ("regular,4000","actually,4600","thonk,4300","actually not,4900")
+
+	foreach _types ; _i
+	{
+		if _i[0] == _type; "\s[" + _i[1]+ "]"
+	}
+
+	if _expression == "wow";  "\i[3000]"
+	else
+	{
+		foreach _exp ; _i
+		{
+			if _i[0] == _expression; "\i[" + (TOINT(_i[1]) + Colors[0])  + "]"
+		}
+	}
+
+	foreach _arm ; _i
+	{
+		if _i[0] == _armPose; "\i[" + (TOINT(_i[1]) + Colors[1])  + "]"
+	} 
+
+	if _argv[4] == "?"; "\i[9000]"
+
+	if _argv[3] == "flip"; "\i[%(6000 + Colors[1]),wait]"
+	else; "\i[%(5200 + Colors[1])]"
+}

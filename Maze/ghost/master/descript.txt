@@ -1,0 +1,16 @@
+charset,UTF-8
+
+name,The Maze
+type,ghost
+
+shiori,yaya.dll
+
+craftman,Zdzisiu
+craftmanurl,
+
+sakura.name,Maze
+kero.name,Narrator
+
+icon,icon.ico
+
+sstp.allowunspecifiedsend,0
