@@ -54,12 +54,12 @@ Endings : array
 	"\b2%(Pose('stright','','actually'))Ahem.\n\n*You enter the brightly lit cavern, %(Pose('','focused','actually')) a bright, white lamp illuminating the white %(Pose('','','actually')) **tile walls** and floor?%(Pose('','what',''))\n\n**Tile**?%(Pose('','what','thonk'))\n\n*On the opposite wall,\w4 you can see a bright, blue, %(Pose('','HUH','actually'))\**circular** entrance? You enter it, and it* TURNS OUT TO BE A SLIDE?!%(Pose('','HUH','actually not'))\n\nWHY WOULD%(Pose('','angry','thonk')) THERE BE A SLIDE IN A DEATH MAZE?!\n\n%(Pose('','what',''))*YOU SLIDE DOWN ON THE GRASS, CONGRATULATIONS, YOU ESCAPED WITH STYLE?!*\n\n%(Pose('','angy',''))Preposterous!\w5 What even is this ending?!%(Pose('','angy','thonk'))\w5 Where is the drama,\w2 the monsters,\w2 the flesh eating fog,\w2 anything!?%(Pose('','angy','thonk'))\w8\n\n%(Pose('','what',''))You know what,\w3 whatever,\w4 do you want to **==\__q[OnStart]try again\__q==**?\w5%(Pose('','what','')) Maybe the next ending will make more sense."
 }
 
-//Here you put flavor text that is displayed after a choice. You can make it conditional, or random using "|" as separator
+//Here you put flavor text that is displayed after a choice.
 FlavorText : array
 {
-	"%(screamText)"
-	"%(xText)"
-	"%(doorText)"
+	screamText
+	xText
+	doorText
 }
 
 screamText : nonoverlap_pool
