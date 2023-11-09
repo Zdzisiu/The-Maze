@@ -9,7 +9,7 @@ file,ghost/master/mouse.dic190751e9e63014bc9775c9041a8e0267size=75date=2023-1
 file,ghost/master/other.dicde561d19fa37615e8bc20e55743bfe8dsize=6919date=2023-11-09T05:38:48
 file,ghost/master/saori/IMS.exe042a25b33e163ab8320f2a13844e203fsize=24407687date=2023-06-15T13:14:39
 file,ghost/master/saori/proxy_ex.dll8ff13a8c1b2b0261f61704c1f457cc8csize=48128date=2018-10-13T09:36:55
-file,ghost/master/word.dic95c8d7f2796a710394a3d81f5158a9c2size=28299date=2023-11-09T05:27:49
+file,ghost/master/word.dic31c987cd1b750daac81e960d58da2cb7size=28298date=2023-11-09T05:54:19
 file,ghost/master/yaya.dll56e3af56c88e696cea1f39d53b239cefsize=880640date=2022-09-11T00:18:59
 file,ghost/master/yaya.txt460bc9c7c261679070634a7633617ea9size=697date=2023-11-01T21:51:08
 file,ghost/master/yaya_base/_loading_order.txt9c350c2c9c08f635bff5eaae149af8c8size=103date=2023-04-02T15:34:13

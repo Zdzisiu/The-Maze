@@ -57,9 +57,9 @@ Endings : array
 //Here you put flavor text that is displayed after a choice. You can make it conditional, or random using "|" as separator
 FlavorText : array
 {
-	screamText
-	xText
-	doorText
+	"%(screamText)"
+	"%(xText)"
+	"%(doorText)"
 }
 
 screamText : nonoverlap_pool
@@ -157,7 +157,7 @@ OnPathChoice : all
 		else
 		{
 
-			_flavorText = ANY(SPLIT(FlavorText[_choiceID],"|")) //Or render one of the flavor texts associated with the choice
+			_flavorText = FlavorText[_choiceID] //Or render one of the flavor texts associated with the choice
 
 			_flavorText = REPLACE(_flavorText,",",",%(Pose(ANY('stright',''),ANY('','focused'),ANY('thonk','actually','')))")
 			_flavorText = REPLACE(_flavorText,".",".%(Pose(ANY('stright',''),ANY('','focused'),ANY('thonk','actually','')))")
